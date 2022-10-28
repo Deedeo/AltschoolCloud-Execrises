@@ -1,0 +1,29 @@
+## How to Calculate the Network Address and Broadcast Address
+Given IP address: 193.16.20.35/29
+Step1: Write the given IP address in binary format.
+
+Step 2: Write the subnet mask in binary form.
+
+Step: Perform the logical operation between the corresponding octets of the IP address and the subnet mask.
+
+Step 4: Convert the result back to the decimal format and this will be the network address.
+
+IP adrress = 193.16.20.36/29
+Binary Equivalent = 11000001.00010000.00010100.00100100
+Netmask = 11111111.11111111.11111111.11111000
+Using Logiacal AND Method 
+`NetworkIP: 193.16.20.32`
+
+BroadcastIP=>(Magic Number+NetworkId-1)
+8+32-1=39
+`BroadcastIP = 193.16.20.39`
+
+Host Range of IP Adrresses that can be assigned to hosts lie between the Netowrk IP and Broadcast IP
+
+Host Ranges: 
+ * `193.16.20.33`
+ * `193.16.20.34`
+ * `193.16.20.35`
+ * `193.16.20.36`
+ * `193.16.20.37`
+ * `193.16.20.38`

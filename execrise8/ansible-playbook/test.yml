@@ -1,0 +1,44 @@
+---
+- name: Setup Web Server
+  hosts: all
+  remote_user: vagrant
+  become: yes
+
+  tasks:
+  - name: Update Repository cache
+    apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+  - name: Update cache & Full system update
+    apt: upgrade=dist force_apt_get=yes
+
+  - name: Install Apache server/PHP/Apache-PHP-module
+    apt:
+      name:
+      - apache2
+      - php
+      - libapache2-mod-php
+      state: latest
+
+  - name: Enabling Apache2 service and start the service
+    service:
+      name: apache2
+      enabled: yes
+      state: started
+
+  - name: Copying your php file in the /var/www/html
+    copy:
+      src: /home/vagrant/ansible/index.php
+      dest: /var/www/html/index.php
+      force: yes
+    notify:
+       - restart apache2 service
+
+  - name: set timezone to Africa/Lagos
+    timezone:
+       name: Africa/Lagos
+
+  handlers:
+  - name: restart apache2 service
+    service:
+       name: apache2
+       state: restarted
